@@ -238,6 +238,28 @@ h2.sec-title{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:900;color:var(--dark
 .why-card h3{font-size:.95rem;font-weight:700;color:var(--dark);margin-bottom:8px}
 .why-card p{font-size:.83rem;color:var(--gray);line-height:1.6}
 
+/* ── DOCS ── */
+.docs-section{background:var(--light);padding:80px 5%}
+.docs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:0}
+.doc-card{
+  display:flex;align-items:center;gap:16px;
+  padding:20px 22px;border-radius:16px;
+  background:var(--white);border:1.5px solid #e2e8f0;
+  text-decoration:none;color:inherit;
+  transition:all .25s;
+}
+.doc-card:hover{border-color:#93c5fd;box-shadow:0 8px 28px rgba(0,119,182,.1);transform:translateY(-2px)}
+.doc-icon{font-size:2rem;flex-shrink:0;width:48px;height:48px;background:#eff6ff;border-radius:12px;display:flex;align-items:center;justify-content:center}
+.doc-body{flex:1;min-width:0}
+.doc-title{font-size:.92rem;font-weight:700;color:var(--dark);margin-bottom:3px}
+.doc-sub{font-size:.78rem;color:var(--gray);line-height:1.4}
+.doc-arrow{font-size:1.1rem;color:#93c5fd;flex-shrink:0;transition:transform .2s}
+.doc-card:hover .doc-arrow{transform:translateX(4px);color:var(--blue)}
+@media(max-width:768px){
+  .docs-section{padding:44px 4%}
+  .docs-grid{grid-template-columns:1fr}
+}
+
 /* ── FOOTER ── */
 footer{background:#0b1221;padding:48px 5% 28px}
 .footer-inner{max-width:1200px;margin:0 auto}
@@ -617,6 +639,49 @@ footer ul li a:hover{color:var(--white)}
       <div class="why-card"><div class="why-icon">💰</div><h3>Честная цена</h3><p>Горная вода высшего качества по доступной цене без переплат.</p></div>
       <div class="why-card"><div class="why-icon">📱</div><h3>Удобный заказ</h3><p>Сайт или WhatsApp — ответим за 15 минут и согласуем доставку.</p></div>
       <div class="why-card"><div class="why-icon">🌿</div><h3>Эко-источник</h3><p>Источник в чистом горном районе, вдали от промышленного загрязнения.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCS -->
+<section class="docs-section">
+  <div class="container">
+    <div class="eyebrow">Официальные документы</div>
+    <h2 class="sec-title">Работаем легально</h2>
+    <p class="sec-desc">Производство лицензировано, вода сертифицирована. Все документы в открытом доступе.</p>
+    <div class="docs-grid">
+      <a class="doc-card" href="docs/%D0%94%D0%B5%D0%BA%D0%BB%D0%B0%D1%80%D0%B0%D1%86%D0%B8%D1%8F%20%D0%BE%20%D1%81%D0%BE%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D1%81%D1%82%D0%B2%D0%B8%D0%B8.pdf" target="_blank" rel="noopener">
+        <div class="doc-icon">📋</div>
+        <div class="doc-body">
+          <div class="doc-title">Декларация о соответствии</div>
+          <div class="doc-sub">Соответствие продукции стандартам качества</div>
+        </div>
+        <div class="doc-arrow">→</div>
+      </a>
+      <a class="doc-card" href="docs/%D0%97%D0%90%D0%9A%D0%9B%D0%AE%D0%A7%D0%95%D0%9D%D0%98%D0%95_%D0%A0%D0%BE%D1%81%D0%BF%D0%BE%D1%82%D1%80%D0%B5%D0%B1%D0%BD%D0%B0%D0%B4%D0%B7%D0%BE%D1%80%D0%B0_%D0%BD%D0%B0_%D1%81%D0%BA%D0%B2%D0%B0%D0%B6%D0%B8%D0%BD%D1%83.pdf" target="_blank" rel="noopener">
+        <div class="doc-icon">🏛</div>
+        <div class="doc-body">
+          <div class="doc-title">Заключение Роспотребнадзора</div>
+          <div class="doc-sub">Санитарно-эпидемиологическое заключение на скважину</div>
+        </div>
+        <div class="doc-arrow">→</div>
+      </a>
+      <a class="doc-card" href="docs/%D0%9B%D0%98%D0%A6%D0%95%D0%9D%D0%97%D0%98%D0%AF%20%D0%9C%D0%B8%D0%BD%D0%BF%D1%80%D0%B8%D1%80%D0%BE%D0%B4%D1%8B%20%D0%BD%D0%B0%20%D1%81%D0%BA%D0%B2%D0%B0%D0%B6%D0%B8%D0%BD%D1%83.pdf" target="_blank" rel="noopener">
+        <div class="doc-icon">📜</div>
+        <div class="doc-body">
+          <div class="doc-title">Лицензия Минприроды на скважину</div>
+          <div class="doc-sub">Лицензия на пользование недрами</div>
+        </div>
+        <div class="doc-arrow">→</div>
+      </a>
+      <a class="doc-card" href="docs/%D0%9B%D0%98%D0%A6%D0%95%D0%9D%D0%97%D0%98%D0%AF_%D1%81%D0%BE%D0%BA%D1%80%D0%B0%D1%89%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D0%9C%D0%B8%D0%BD%D0%BF%D1%80%D0%B8%D1%80%D0%BE%D0%B4%D1%8B_%D0%BD%D0%B0_%D1%81%D0%BA%D0%B2%D0%B0%D0%B6%D0%B8%D0%BD%D1%83.pdf" target="_blank" rel="noopener">
+        <div class="doc-icon">📄</div>
+        <div class="doc-body">
+          <div class="doc-title">Лицензия Минприроды (сокращённая)</div>
+          <div class="doc-sub">Краткая версия лицензии на скважину</div>
+        </div>
+        <div class="doc-arrow">→</div>
+      </a>
     </div>
   </div>
 </section>
