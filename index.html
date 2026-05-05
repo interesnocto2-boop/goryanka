@@ -238,6 +238,43 @@ h2.sec-title{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:900;color:var(--dark
 .why-card h3{font-size:.95rem;font-weight:700;color:var(--dark);margin-bottom:8px}
 .why-card p{font-size:.83rem;color:var(--gray);line-height:1.6}
 
+/* ── PRICING ── */
+.pricing{padding:80px 5%;background:var(--white)}
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px;max-width:700px}
+.price-card{
+  position:relative;padding:36px 30px;border-radius:22px;
+  background:var(--light);border:2px solid #e2e8f0;
+  transition:all .3s;
+}
+.price-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,119,182,.12)}
+.price-popular{background:var(--blue-dark);border-color:var(--blue-dark);color:#fff}
+.price-popular .price-desc{color:rgba(255,255,255,.7)}
+.price-popular .price-unit{color:rgba(255,255,255,.55)}
+.price-badge{
+  position:absolute;top:-12px;left:24px;
+  background:#4ade80;color:#14532d;
+  font-size:.72rem;font-weight:800;padding:4px 12px;border-radius:50px;letter-spacing:.3px;
+}
+.price-icon{font-size:2rem;margin-bottom:14px}
+.price-title{font-size:1.05rem;font-weight:800;margin-bottom:8px}
+.price-desc{font-size:.85rem;color:var(--gray);line-height:1.5;margin-bottom:20px}
+.price-amount{font-size:3rem;font-weight:900;line-height:1;margin-bottom:4px}
+.price-amount span{font-size:1.6rem;font-weight:700;opacity:.7}
+.price-unit{font-size:.78rem;color:var(--gray);margin-bottom:24px}
+.price-popular .price-amount{color:#fff}
+.price-btn{
+  display:inline-block;padding:12px 24px;border-radius:50px;font-size:.88rem;font-weight:700;text-decoration:none;
+  background:linear-gradient(135deg,var(--blue),var(--accent));color:#fff;
+  transition:transform .2s,box-shadow .2s;
+}
+.price-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,119,182,.4)}
+.price-btn-outline{background:transparent;border:2px solid var(--blue);color:var(--blue)}
+.price-btn-outline:hover{background:var(--blue);color:#fff}
+@media(max-width:768px){
+  .pricing{padding:44px 4%}
+  .pricing-grid{grid-template-columns:1fr;max-width:100%}
+}
+
 /* ── DOCS ── */
 .docs-section{background:var(--light);padding:80px 5%}
 .docs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:0}
@@ -622,6 +659,33 @@ footer ul li a:hover{color:var(--white)}
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing">
+  <div class="container">
+    <div class="eyebrow">Стоимость</div>
+    <h2 class="sec-title">Цены на воду</h2>
+    <div class="pricing-grid">
+      <div class="price-card price-popular">
+        <div class="price-badge">Выгодно</div>
+        <div class="price-icon">🔄</div>
+        <div class="price-title">С заменой бутыли</div>
+        <div class="price-desc">Привозим полную — забираем пустую. Не нужно думать о бутылях.</div>
+        <div class="price-amount">300 <span>₽</span></div>
+        <div class="price-unit">за 19-литровую бутыль</div>
+        <a href="#" class="price-btn" onclick="document.getElementById('orderForm').scrollIntoView({behavior:'smooth'});return false">Заказать →</a>
+      </div>
+      <div class="price-card">
+        <div class="price-icon">🏠</div>
+        <div class="price-title">С выкупом бутыли</div>
+        <div class="price-desc">Бутыль остаётся у вас. Удобно при первом заказе или для запаса.</div>
+        <div class="price-amount">850 <span>₽</span></div>
+        <div class="price-unit">бутыль + вода</div>
+        <a href="#" class="price-btn price-btn-outline" onclick="document.getElementById('orderForm').scrollIntoView({behavior:'smooth'});return false">Заказать →</a>
       </div>
     </div>
   </div>
