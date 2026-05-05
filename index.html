@@ -859,6 +859,14 @@ function updateTimeChips(iso){
   })
 }
 
+// ── Восстановление данных из localStorage ──
+;(function(){
+  const saved=JSON.parse(localStorage.getItem('goryankaUser')||'{}')
+  if(saved.name)document.querySelector('[name=name]').value=saved.name
+  if(saved.phone)document.querySelector('[name=phone]').value=saved.phone
+  if(saved.address)document.querySelector('[name=address]').value=saved.address
+})()
+
 // ── Логика выбора чипов ──
 let selDate='',selTime='',selDateIso=''
 document.getElementById('dateChips').addEventListener('click',function(e){
@@ -913,8 +921,19 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
         if(!bookedSlots[selDateIso].includes(selTime))bookedSlots[selDateIso].push(selTime)
       }
     }
+    // Сохраняем данные клиента
+    localStorage.setItem('goryankaUser',JSON.stringify({
+      name:d.get('name'),
+      phone:d.get('phone'),
+      address:d.get('address')
+    }))
     document.getElementById('modal').classList.add('show')
     this.reset()
+    // Восстанавливаем сохранённые данные после reset
+    const saved=JSON.parse(localStorage.getItem('goryankaUser')||'{}')
+    if(saved.name)document.querySelector('[name=name]').value=saved.name
+    if(saved.phone)document.querySelector('[name=phone]').value=saved.phone
+    if(saved.address)document.querySelector('[name=address]').value=saved.address
     document.querySelectorAll('.chip,.tchip').forEach(c=>c.classList.remove('active','booked'))
     selDate='';selTime='';selDateIso=''
   }catch{
