@@ -898,29 +898,20 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
     selTime?'Время: '+selTime:''
   ].filter(Boolean)
   try{
-    const r=await fetch('/api/contact',{
+    const name=d.get('name'),phone=d.get('phone'),address=d.get('address'),qty=d.get('qty')
+    const msg=`🌊 *Новая заявка — Горянка*\n\n`+
+      `👤 *Имя:* ${name}\n`+
+      `📞 *Телефон:* ${phone}\n`+
+      (address?`📍 *Адрес:* ${address}\n`:'')+
+      `💧 *Количество:* ${qty}\n`+
+      (selDate?`📅 *Дата:* ${selDate}\n`:'')+
+      (selTime?`⏰ *Время:* ${selTime}\n`:'')
+    const r=await fetch(`https://api.telegram.org/bot8602126267:AAE3wlDnxHPhS40pHjtc-ZHgneaosAf3phI/sendMessage`,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        name:d.get('name'),
-        phone:d.get('phone'),
-        message:parts.join(' | '),
-        delivery_date:selDateIso,
-        delivery_time:selTime
-      })
+      body:JSON.stringify({chat_id:'2038728324',text:msg,parse_mode:'Markdown'})
     })
     if(!r.ok)throw new Error()
-    const resp=await r.json()
-    if(resp.order_id){
-      document.getElementById('modalOrderNum').textContent='#'+resp.order_id
-      document.getElementById('modalOrderId').style.display='block'
-      document.getElementById('modalStatusLink').href='/status.html?id='+resp.order_id
-      // Обновляем занятые слоты
-      if(selDateIso&&selTime){
-        bookedSlots[selDateIso]=bookedSlots[selDateIso]||[]
-        if(!bookedSlots[selDateIso].includes(selTime))bookedSlots[selDateIso].push(selTime)
-      }
-    }
     // Сохраняем данные клиента
     localStorage.setItem('goryankaUser',JSON.stringify({
       name:d.get('name'),
