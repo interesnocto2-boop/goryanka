@@ -209,14 +209,15 @@ h2.sec-title{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:900;color:var(--dark
 }
 .about-visual img{width:100%;height:auto;display:block}
 .about-logo-wrap{
-  background:#000;
-  aspect-ratio:1/1;
+  background:none;
+  box-shadow:none;
   display:flex;align-items:center;justify-content:center;
-  padding:40px;
+  overflow:visible;
 }
 .about-logo-wrap img{
-  width:100%;height:100%;
-  object-fit:contain;
+  width:80%;max-width:360px;height:auto;
+  border-radius:50%;
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
 }
 .about-visual-emoji{display:none}
 .about-visual-text{display:none}
