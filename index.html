@@ -978,6 +978,12 @@ footer ul li a:hover{color:var(--white)}
 </div>
 
 <script>
+// ── Утилиты ──
+function escXSS(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function validPhone(p){return /^(\+7|8|7)\d{10}$/.test(p.replace(/[\s\-\(\)]/g,''))}
+function lsGet(k,def=''){try{return localStorage.getItem(k)||def}catch{return def}}
+function lsSet(k,v){try{localStorage.setItem(k,v)}catch{}}
+
 // ── Счётчик бутылей ──
 let qtyCount=1
 const qtyVal=document.getElementById('qtyVal')
@@ -1050,10 +1056,11 @@ function updateTimeChips(iso){
 
 // ── Восстановление данных из localStorage ──
 ;(function(){
-  const saved=JSON.parse(localStorage.getItem('goryankaUser')||'{}')
+  try{const saved=JSON.parse(lsGet('goryankaUser','{}'))
   if(saved.name)document.querySelector('[name=name]').value=saved.name
   if(saved.phone)document.querySelector('[name=phone]').value=saved.phone
   if(saved.address)document.querySelector('[name=address]').value=saved.address
+  }catch{}
 })()
 
 // ── Логика выбора чипов ──
@@ -1078,50 +1085,52 @@ document.getElementById('timeChips').addEventListener('click',function(e){
 document.getElementById('orderForm').addEventListener('submit',async function(e){
   e.preventDefault()
   const btn=this.querySelector('.btn-submit')
-  btn.disabled=true;btn.textContent='Отправляем...'
   const d=new FormData(this)
-  const parts=[
-    d.get('qty'),
-    d.get('address')?'Адрес: '+d.get('address'):'',
-    selDate?'Дата: '+selDate:'',
-    selTime?'Время: '+selTime:''
-  ].filter(Boolean)
-  const lastOrder=localStorage.getItem('goryankaLastOrder')
-  if(lastOrder&&Date.now()-lastOrder<60*60*1000){
-    const mins=Math.ceil((60*60*1000-(Date.now()-lastOrder))/60000)
+  const name=(d.get('name')||'').trim()
+  const phone=(d.get('phone')||'').trim()
+  const address=(d.get('address')||'').trim()
+  const qty=d.get('qty')||''
+
+  // Валидация: все поля обязательны
+  if(!name){alert('Пожалуйста, введите ваше имя');document.querySelector('[name=name]').focus();return}
+  if(!phone){alert('Пожалуйста, введите номер телефона');document.querySelector('[name=phone]').focus();return}
+  if(!validPhone(phone)){alert('Неверный формат телефона. Пример: +7 906 066-64-62');document.querySelector('[name=phone]').focus();return}
+  if(!address){alert('Пожалуйста, укажите адрес доставки');document.querySelector('[name=address]').focus();return}
+  if(!selDate){alert('Выберите дату доставки');return}
+  if(!selTime){alert('Выберите время доставки');return}
+
+  // Лимит повторных заявок
+  const lastOrder=lsGet('goryankaLastOrder')
+  if(lastOrder&&Date.now()-Number(lastOrder)<60*60*1000){
+    const mins=Math.ceil((60*60*1000-(Date.now()-Number(lastOrder)))/60000)
     alert(`Ваша заявка уже принята! Мы скоро перезвоним. Повторный заказ можно оставить через ${mins} мин.`)
-    btn.disabled=false;btn.textContent='🚚 Оформить доставку →'
     return
   }
+
+  btn.disabled=true;btn.textContent='Отправляем...'
   try{
-    const name=d.get('name'),phone=d.get('phone'),address=d.get('address'),qty=d.get('qty')
     const msg=`🌊 *Новая заявка — Горянка*\n\n`+
-      `👤 *Имя:* ${name}\n`+
-      `📞 *Телефон:* ${phone}\n`+
-      (address?`📍 *Адрес:* ${address}\n`:'')+
-      `💧 *Количество:* ${qty}\n`+
-      (selDate?`📅 *Дата:* ${selDate}\n`:'')+
-      (selTime?`⏰ *Время:* ${selTime}\n`:'')
+      `👤 *Имя:* ${escXSS(name)}\n`+
+      `📞 *Телефон:* ${escXSS(phone)}\n`+
+      `📍 *Адрес:* ${escXSS(address)}\n`+
+      `💧 *Количество:* ${escXSS(qty)}\n`+
+      `📅 *Дата:* ${escXSS(selDate)}\n`+
+      `⏰ *Время:* ${escXSS(selTime)}`
     const r=await fetch(`https://api.telegram.org/bot8602126267:AAE3wlDnxHPhS40pHjtc-ZHgneaosAf3phI/sendMessage`,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({chat_id:'2038728324',text:msg,parse_mode:'Markdown'})
     })
     if(!r.ok)throw new Error()
-    // Сохраняем данные клиента
-    localStorage.setItem('goryankaLastOrder',Date.now())
-    localStorage.setItem('goryankaUser',JSON.stringify({
-      name:d.get('name'),
-      phone:d.get('phone'),
-      address:d.get('address')
-    }))
+    lsSet('goryankaLastOrder',Date.now())
+    lsSet('goryankaUser',JSON.stringify({name,phone,address}))
     document.getElementById('modal').classList.add('show')
     this.reset()
-    // Восстанавливаем сохранённые данные после reset
-    const saved=JSON.parse(localStorage.getItem('goryankaUser')||'{}')
-    if(saved.name)document.querySelector('[name=name]').value=saved.name
-    if(saved.phone)document.querySelector('[name=phone]').value=saved.phone
-    if(saved.address)document.querySelector('[name=address]').value=saved.address
+    try{const saved=JSON.parse(lsGet('goryankaUser','{}'))
+      if(saved.name)document.querySelector('[name=name]').value=saved.name
+      if(saved.phone)document.querySelector('[name=phone]').value=saved.phone
+      if(saved.address)document.querySelector('[name=address]').value=saved.address
+    }catch{}
     document.querySelectorAll('.chip,.tchip').forEach(c=>c.classList.remove('active','booked'))
     selDate='';selTime='';selDateIso=''
   }catch{
