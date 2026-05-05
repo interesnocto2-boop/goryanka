@@ -655,8 +655,22 @@ footer ul li a:hover{color:var(--white)}
           <input type="hidden" name="qty" id="qtyInput" value="19 л — 1 бутыль"/>
         </div>
         <div class="fg">
-          <label>Адрес доставки</label>
-          <input type="text" name="address" placeholder="Улица, дом, квартира" autocomplete="street-address"/>
+          <label>Улица и дом *</label>
+          <input type="text" name="street" placeholder="ул. Ленина, д. 12" autocomplete="street-address"/>
+        </div>
+        <div class="form-row">
+          <div class="fg">
+            <label>Подъезд</label>
+            <input type="text" name="entrance" placeholder="2"/>
+          </div>
+          <div class="fg">
+            <label>Квартира</label>
+            <input type="text" name="apartment" placeholder="15"/>
+          </div>
+        </div>
+        <div class="fg">
+          <label>Комментарий к заказу</label>
+          <textarea name="comment" placeholder="Например: бутыли у двери, можете просто заменить"></textarea>
         </div>
 
         <!-- ДАТА -->
@@ -1059,7 +1073,9 @@ function updateTimeChips(iso){
   try{const saved=JSON.parse(lsGet('goryankaUser','{}'))
   if(saved.name)document.querySelector('[name=name]').value=saved.name
   if(saved.phone)document.querySelector('[name=phone]').value=saved.phone
-  if(saved.address)document.querySelector('[name=address]').value=saved.address
+  if(saved.street)document.querySelector('[name=street]').value=saved.street
+  if(saved.entrance)document.querySelector('[name=entrance]').value=saved.entrance
+  if(saved.apartment)document.querySelector('[name=apartment]').value=saved.apartment
   }catch{}
 })()
 
@@ -1088,14 +1104,17 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
   const d=new FormData(this)
   const name=(d.get('name')||'').trim()
   const phone=(d.get('phone')||'').trim()
-  const address=(d.get('address')||'').trim()
+  const street=(d.get('street')||'').trim()
+  const entrance=(d.get('entrance')||'').trim()
+  const apartment=(d.get('apartment')||'').trim()
+  const comment=(d.get('comment')||'').trim()
   const qty=d.get('qty')||''
 
   // Валидация: все поля обязательны
   if(!name){alert('Пожалуйста, введите ваше имя');document.querySelector('[name=name]').focus();return}
   if(!phone){alert('Пожалуйста, введите номер телефона');document.querySelector('[name=phone]').focus();return}
   if(!validPhone(phone)){alert('Неверный формат телефона. Пример: +7 906 066-64-62');document.querySelector('[name=phone]').focus();return}
-  if(!address){alert('Пожалуйста, укажите адрес доставки');document.querySelector('[name=address]').focus();return}
+  if(!street){alert('Пожалуйста, укажите улицу и дом');document.querySelector('[name=street]').focus();return}
   if(!selDate){alert('Выберите дату доставки');return}
   if(!selTime){alert('Выберите время доставки');return}
 
@@ -1109,13 +1128,15 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
 
   btn.disabled=true;btn.textContent='Отправляем...'
   try{
+    const addrFull=[escXSS(street),entrance?'подъезд '+escXSS(entrance):'',apartment?'кв. '+escXSS(apartment):''].filter(Boolean).join(', ')
     const msg=`🌊 *Новая заявка — Горянка*\n\n`+
       `👤 *Имя:* ${escXSS(name)}\n`+
       `📞 *Телефон:* ${escXSS(phone)}\n`+
-      `📍 *Адрес:* ${escXSS(address)}\n`+
+      `📍 *Адрес:* ${addrFull}\n`+
       `💧 *Количество:* ${escXSS(qty)}\n`+
       `📅 *Дата:* ${escXSS(selDate)}\n`+
-      `⏰ *Время:* ${escXSS(selTime)}`
+      `⏰ *Время:* ${escXSS(selTime)}\n`+
+      (comment?`💬 *Комментарий:* ${escXSS(comment)}\n`:'')
     const r=await fetch(`https://api.telegram.org/bot8602126267:AAE3wlDnxHPhS40pHjtc-ZHgneaosAf3phI/sendMessage`,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
@@ -1123,13 +1144,15 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
     })
     if(!r.ok)throw new Error()
     lsSet('goryankaLastOrder',Date.now())
-    lsSet('goryankaUser',JSON.stringify({name,phone,address}))
+    lsSet('goryankaUser',JSON.stringify({name,phone,street,entrance,apartment}))
     document.getElementById('modal').classList.add('show')
     this.reset()
     try{const saved=JSON.parse(lsGet('goryankaUser','{}'))
       if(saved.name)document.querySelector('[name=name]').value=saved.name
       if(saved.phone)document.querySelector('[name=phone]').value=saved.phone
-      if(saved.address)document.querySelector('[name=address]').value=saved.address
+      if(saved.street)document.querySelector('[name=street]').value=saved.street
+      if(saved.entrance)document.querySelector('[name=entrance]').value=saved.entrance
+      if(saved.apartment)document.querySelector('[name=apartment]').value=saved.apartment
     }catch{}
     document.querySelectorAll('.chip,.tchip').forEach(c=>c.classList.remove('active','booked'))
     selDate='';selTime='';selDateIso=''
