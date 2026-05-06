@@ -626,7 +626,7 @@ footer ul li a:hover{color:var(--white)}
     <div class="hero-left">
       <div class="hero-badge">
         <span class="badge-dot"></span>
-        Горная вода · Дагестан
+        Негазированная · Артезианская · Дагестан
       </div>
       <h1>Чистая вода<br>прямо <em>с гор</em></h1>
       <p class="hero-sub">Натуральная горная вода без химии и обработки. Доставим прямо к вашей двери.</p>
@@ -818,6 +818,13 @@ footer ul li a:hover{color:var(--white)}
             <div>
               <h4>Природная фильтрация</h4>
               <p>Вода проходит сквозь горные породы годами. Никакой химической обработки.</p>
+            </div>
+          </div>
+          <div class="feat">
+            <div class="feat-icon">💎</div>
+            <div>
+              <h4>Негазированная артезианская</h4>
+              <p>Добывается из артезианской скважины. Без газа, без обработки — такой, какой создала природа.</p>
             </div>
           </div>
           <div class="feat">
@@ -1158,19 +1165,19 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
 
   btn.disabled=true;btn.textContent='Отправляем...'
   try{
-    const addrFull=[escXSS(street),entrance?'подъезд '+escXSS(entrance):'',apartment?'кв. '+escXSS(apartment):''].filter(Boolean).join(', ')
-    const msg=`🌊 *Новая заявка — Горянка*\n\n`+
-      `👤 *Имя:* ${escXSS(name)}\n`+
-      `📞 *Телефон:* ${escXSS(phone)}\n`+
-      `📍 *Адрес:* ${addrFull}\n`+
-      `💧 *Количество:* ${escXSS(qty)}\n`+
-      `📅 *Дата:* ${escXSS(selDate)}\n`+
-      `⏰ *Время:* в течение дня (9:00–17:00)\n`+
-      (comment?`💬 *Комментарий:* ${escXSS(comment)}\n`:'')
+    const addrFull=[street,entrance?'подъезд '+entrance:'',apartment?'кв. '+apartment:''].filter(Boolean).join(', ')
+    const msg=`🌊 Новая заявка — Горянка\n\n`+
+      `👤 Имя: ${name}\n`+
+      `📞 Телефон: ${phone}\n`+
+      `📍 Адрес: ${addrFull}\n`+
+      `💧 Количество: ${qty}\n`+
+      `📅 Дата: ${selDate}\n`+
+      `⏰ Время: в течение дня (9:00–17:00)\n`+
+      (comment?`💬 Комментарий: ${comment}\n`:'')
     const r=await fetch(`https://api.telegram.org/bot8602126267:AAE3wlDnxHPhS40pHjtc-ZHgneaosAf3phI/sendMessage`,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({chat_id:'2038728324',text:msg,parse_mode:'Markdown'})
+      body:JSON.stringify({chat_id:'2038728324',text:msg})
     })
     if(!r.ok)throw new Error()
     lsSet('goryankaLastOrder',Date.now())
