@@ -205,6 +205,26 @@ h2.sec-title{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:900;color:var(--dark
 .sec-desc{font-size:.95rem;color:var(--gray);line-height:1.7;max-width:520px;margin-bottom:40px}
 
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.about-logo-bg{
+  border-radius:28px;padding:52px 44px;
+  background:linear-gradient(140deg,#e0f2fe 0%,#f0f9ff 55%,#dbeafe 100%);
+  box-shadow:0 24px 64px rgba(0,119,182,.18);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.about-logo-bg::before{
+  content:'';position:absolute;
+  width:260px;height:260px;border-radius:50%;
+  background:rgba(144,224,239,.25);
+  top:-80px;right:-80px;
+}
+.about-logo-bg::after{
+  content:'';position:absolute;
+  width:180px;height:180px;border-radius:50%;
+  background:rgba(0,119,182,.08);
+  bottom:-50px;left:-50px;
+}
+.about-logo-bg img{width:85%;max-width:300px;position:relative;z-index:1;display:block}
 .about-visual{
   border-radius:24px;overflow:hidden;
   box-shadow:0 20px 56px rgba(0,119,182,.3);
@@ -420,16 +440,6 @@ footer ul li a:hover{color:var(--white)}
 }
 .chip:hover{border-color:#93c5fd;background:#eff6ff}
 .chip.active{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 3px 10px rgba(0,119,182,.3)}
-.time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:0}
-.tchip{
-  padding:9px 4px;border-radius:10px;text-align:center;
-  border:1.5px solid #e2e8f0;background:#f8fafc;
-  font-size:.76rem;font-weight:600;color:#374151;cursor:pointer;
-  transition:all .18s;user-select:none;
-}
-.tchip:hover:not(.booked){border-color:#93c5fd;background:#eff6ff}
-.tchip.active{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 3px 10px rgba(0,119,182,.3)}
-.tchip.booked{opacity:.45;cursor:not-allowed;background:#f1f5f9;border-color:#e2e8f0;color:#94a3b8;text-decoration:line-through}
 .fg-chips{margin-bottom:14px}
 
 /* ── WA FLOAT ── */
@@ -523,10 +533,6 @@ footer ul li a:hover{color:var(--white)}
   .chips-label{font-size:.7rem;margin-bottom:4px}
   .chip{font-size:.7rem;padding:6px 10px}
 
-  /* Чипы времени */
-  .time-grid{grid-template-columns:repeat(2,1fr);gap:5px}
-  .tchip{font-size:.71rem;padding:8px 2px;border-radius:8px}
-
   /* Кнопка */
   .btn-submit{padding:11px;font-size:.88rem;border-radius:10px;margin-top:2px}
   .form-trust{font-size:.66rem;margin-top:5px}
@@ -542,8 +548,7 @@ footer ul li a:hover{color:var(--white)}
 
   .about{padding:44px 4%}
   .about-grid{grid-template-columns:1fr}
-  .about-visual{height:200px}
-  .about-visual-emoji{font-size:3rem}
+  .about-logo-bg{padding:36px 32px}
   .sec-desc{font-size:.88rem}
 
   .why{padding:44px 4%}
@@ -575,7 +580,15 @@ footer ul li a:hover{color:var(--white)}
 <!-- HEADER -->
 <header>
   <a href="#" class="logo">
-    <div class="logo-icon">💧</div>
+    <div class="logo-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none">
+        <path d="M2 19 L8 8 L13 15 L17 9 L22 19 Z" fill="white" opacity="0.95"/>
+        <path d="M5.5 13 L8 8 L10.5 13 Z" fill="#90e0ef"/>
+        <path d="M14.8 12.5 L17 9 L19.2 12.5 Z" fill="#90e0ef"/>
+        <ellipse cx="17" cy="5.5" rx="2" ry="2.8" fill="white" opacity="0.85"/>
+        <path d="M17 2.5 L19 5.5 L15 5.5 Z" fill="white" opacity="0.5"/>
+      </svg>
+    </div>
     <div class="logo-text">Горян<span>ка</span></div>
   </a>
   <div style="display:flex;align-items:center;gap:10px">
@@ -679,17 +692,6 @@ footer ul li a:hover{color:var(--white)}
           <div class="chips-row" id="dateChips"></div>
         </div>
 
-        <!-- ВРЕМЯ -->
-        <div class="fg-chips">
-          <span class="chips-label">🕐 Удобное время</span>
-          <div class="time-grid" id="timeChips">
-            <div class="tchip" data-val="9:00–11:00">9:00–11:00</div>
-            <div class="tchip" data-val="11:00–13:00">11:00–13:00</div>
-            <div class="tchip" data-val="13:00–15:00">13:00–15:00</div>
-            <div class="tchip" data-val="15:00–17:00">15:00–17:00</div>
-          </div>
-        </div>
-
         <button type="submit" class="btn-submit">🚚 Оформить доставку →</button>
         <div class="form-trust">🔒 Данные защищены · Не передаём третьим лицам</div>
       </form>
@@ -781,8 +783,8 @@ footer ul li a:hover{color:var(--white)}
 <section class="about">
   <div class="container">
     <div class="about-grid">
-      <div class="about-visual about-logo-wrap">
-        <img src="logo.jpg" alt="Логотип Концильская Горянка"/>
+      <div class="about-logo-bg">
+        <img src="logo.jpg" alt="Горянка — горная вода"/>
       </div>
       <div>
         <div class="eyebrow">О нашей воде</div>
@@ -1024,9 +1026,6 @@ document.querySelectorAll('.faq-q').forEach(btn=>{
   })
 })
 
-// ── Занятые слоты (загружаем один раз) ──
-let bookedSlots = {}
-fetch('/api/slots').then(r=>r.json()).then(d=>{bookedSlots=d}).catch(()=>{})
 
 // ── Генерация кнопок дат (сегодня + 6 дней) ──
 const days=['Вс','Пн','Вт','Ср','Чт','Пт','Сб']
@@ -1047,26 +1046,6 @@ const months=['янв','фев','мар','апр','май','июн','июл','а
   }
 })()
 
-// ── Обновление временных чипов при смене даты ──
-function updateTimeChips(iso){
-  const booked=bookedSlots[iso]||[]
-  const now=new Date()
-  const todayIso=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`
-  const isToday=iso===todayIso
-  const nowMinutes=now.getHours()*60+now.getMinutes()
-  document.querySelectorAll('.tchip').forEach(chip=>{
-    const time=chip.dataset.val
-    const slotStartH=parseInt(time.split(':')[0])
-    const isPast=isToday&&nowMinutes>=slotStartH*60
-    if(booked.includes(time)||isPast){
-      chip.classList.add('booked')
-      chip.classList.remove('active')
-      if(selTime===time)selTime=''
-    }else{
-      chip.classList.remove('booked')
-    }
-  })
-}
 
 // ── Восстановление данных из localStorage ──
 ;(function(){
@@ -1079,22 +1058,14 @@ function updateTimeChips(iso){
   }catch{}
 })()
 
-// ── Логика выбора чипов ──
-let selDate='',selTime='',selDateIso=''
+// ── Логика выбора даты ──
+let selDate='',selDateIso=''
 document.getElementById('dateChips').addEventListener('click',function(e){
   const t=e.target.closest('.chip');if(!t)return
   this.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'))
   t.classList.add('active')
   selDate=t.dataset.val
   selDateIso=t.dataset.iso
-  updateTimeChips(selDateIso)
-})
-document.getElementById('timeChips').addEventListener('click',function(e){
-  const t=e.target.closest('.tchip')
-  if(!t||t.classList.contains('booked'))return
-  this.querySelectorAll('.tchip').forEach(c=>c.classList.remove('active'))
-  t.classList.add('active')
-  selTime=t.dataset.val
 })
 
 // ── Отправка формы ──
@@ -1116,7 +1087,6 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
   if(!validPhone(phone)){alert('Неверный формат телефона. Пример: +7 906 066-64-62');document.querySelector('[name=phone]').focus();return}
   if(!street){alert('Пожалуйста, укажите улицу и дом');document.querySelector('[name=street]').focus();return}
   if(!selDate){alert('Выберите дату доставки');return}
-  if(!selTime){alert('Выберите время доставки');return}
 
   // Лимит повторных заявок
   const lastOrder=lsGet('goryankaLastOrder')
@@ -1135,7 +1105,7 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
       `📍 *Адрес:* ${addrFull}\n`+
       `💧 *Количество:* ${escXSS(qty)}\n`+
       `📅 *Дата:* ${escXSS(selDate)}\n`+
-      `⏰ *Время:* ${escXSS(selTime)}\n`+
+      `⏰ *Время:* в течение дня (9:00–17:00)\n`+
       (comment?`💬 *Комментарий:* ${escXSS(comment)}\n`:'')
     const r=await fetch(`https://api.telegram.org/bot8602126267:AAE3wlDnxHPhS40pHjtc-ZHgneaosAf3phI/sendMessage`,{
       method:'POST',
@@ -1154,8 +1124,8 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
       if(saved.entrance)document.querySelector('[name=entrance]').value=saved.entrance
       if(saved.apartment)document.querySelector('[name=apartment]').value=saved.apartment
     }catch{}
-    document.querySelectorAll('.chip,.tchip').forEach(c=>c.classList.remove('active','booked'))
-    selDate='';selTime='';selDateIso=''
+    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'))
+    selDate='';selDateIso=''
   }catch{
     alert('Ошибка отправки. Позвоните нам: +7 (906) 066-64-62')
   }finally{
