@@ -346,19 +346,48 @@ h2.sec-title{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:900;color:var(--dark
 
 /* ── ZONE ── */
 .zone{padding:80px 5%;background:var(--white)}
-.zone-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
-.zone-item{
-  display:flex;align-items:center;gap:10px;
-  padding:14px 18px;background:var(--light);
-  border-radius:12px;border:1.5px solid #e2e8f0;
-  font-size:.88rem;font-weight:600;color:#334155;
+.zone-layout{display:grid;grid-template-columns:1fr 400px;gap:28px;margin-top:40px;align-items:start}
+.zone-map-wrap{
+  height:400px;border-radius:20px;overflow:hidden;
+  border:1.5px solid #e2e8f0;
+  box-shadow:0 12px 40px rgba(0,119,182,.1);
+  position:relative;
 }
-.zone-dot{width:8px;height:8px;background:#4ade80;border-radius:50%;flex-shrink:0}
+.zone-info{display:flex;flex-direction:column;gap:16px}
+.zone-city-card{
+  display:flex;align-items:center;gap:14px;
+  padding:18px 20px;border-radius:16px;
+  background:linear-gradient(135deg,var(--blue-dark),var(--blue));
+  color:#fff;
+}
+.zone-city-icon{font-size:1.6rem}
+.zone-city-name{font-size:1.1rem;font-weight:800}
+.zone-city-sub{font-size:.8rem;opacity:.75;margin-top:2px}
+.zone-dot{width:10px;height:10px;background:#4ade80;border-radius:50%;flex-shrink:0;box-shadow:0 0 8px #4ade80}
+.zone-facts{display:flex;flex-direction:column;gap:10px}
+.zone-fact{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px;border-radius:12px;
+  background:var(--light);border:1.5px solid #e2e8f0;
+}
+.zone-fact-icon{font-size:1.3rem;flex-shrink:0}
+.zone-fact-title{font-size:.88rem;font-weight:700;color:#1e293b}
+.zone-fact-sub{font-size:.75rem;color:var(--gray);margin-top:2px}
+.zone-order-btn{
+  display:block;text-align:center;
+  padding:14px;border-radius:12px;
+  background:linear-gradient(135deg,var(--blue),var(--accent));
+  color:#fff;text-decoration:none;font-weight:800;font-size:.92rem;
+  box-shadow:0 6px 20px rgba(0,119,182,.35);
+  transition:transform .2s,box-shadow .2s;
+}
+.zone-order-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,119,182,.45)}
 
 @media(max-width:768px){
   .reviews-grid{grid-template-columns:1fr}
   .reviews,.faq,.zone{padding:44px 4%}
-  .zone-grid{grid-template-columns:1fr 1fr}
+  .zone-layout{grid-template-columns:1fr}
+  .zone-map-wrap{height:280px}
 }
 
 /* ── PRICING ── */
@@ -921,9 +950,54 @@ footer ul li a:hover{color:var(--white)}
   <div class="container">
     <div class="eyebrow">Зона доставки</div>
     <h2 class="sec-title">Куда доставляем</h2>
-    <p class="sec-desc">Доставляем по всему Каспийску. Оставьте заявку — привезём в удобное время.</p>
-    <div class="zone-grid" style="max-width:320px">
-      <div class="zone-item" style="font-size:1rem;padding:18px 22px"><span class="zone-dot"></span><strong>Каспийск</strong> — вся территория города</div>
+    <p class="sec-desc">Доставляем по всему Каспийску бесплатно. Оставьте заявку — привезём в удобное время.</p>
+
+    <div class="zone-layout">
+      <div class="zone-map-wrap">
+        <iframe
+          src="https://yandex.ru/map-widget/v1/?ll=47.6333%2C42.8833&z=13&l=map&pt=47.6333,42.8833,pm2blm"
+          width="100%" height="100%"
+          frameborder="0" allowfullscreen
+          style="border:0;display:block"
+          title="Карта доставки Каспийск">
+        </iframe>
+      </div>
+      <div class="zone-info">
+        <div class="zone-city-card">
+          <div class="zone-city-icon">📍</div>
+          <div>
+            <div class="zone-city-name">Каспийск</div>
+            <div class="zone-city-sub">Вся территория города</div>
+          </div>
+          <div class="zone-dot" style="margin-left:auto"></div>
+        </div>
+        <div class="zone-facts">
+          <div class="zone-fact">
+            <div class="zone-fact-icon">🚚</div>
+            <div>
+              <div class="zone-fact-title">Бесплатная доставка</div>
+              <div class="zone-fact-sub">До вашей двери, без минималки</div>
+            </div>
+          </div>
+          <div class="zone-fact">
+            <div class="zone-fact-icon">⏱</div>
+            <div>
+              <div class="zone-fact-title">Ежедневно 9:00–17:00</div>
+              <div class="zone-fact-sub">Перезвоним за 15 минут</div>
+            </div>
+          </div>
+          <div class="zone-fact">
+            <div class="zone-fact-icon">📞</div>
+            <div>
+              <div class="zone-fact-title">+7 (906) 066-64-62</div>
+              <div class="zone-fact-sub">Звоните или пишите в WhatsApp</div>
+            </div>
+          </div>
+        </div>
+        <a href="#orderForm" class="zone-order-btn" onclick="document.getElementById('orderForm').scrollIntoView({behavior:'smooth'});return false">
+          Заказать доставку →
+        </a>
+      </div>
     </div>
   </div>
 </section>
