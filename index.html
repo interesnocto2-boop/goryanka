@@ -206,10 +206,11 @@ h2.sec-title{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:900;color:var(--dark
 
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
 .about-bottle-img{
-  width:100%;max-width:460px;height:auto;display:block;
-  filter:drop-shadow(0 24px 48px rgba(0,100,180,.2));
-  animation:ab-float 5s ease-in-out infinite;
+  width:100%;max-width:500px;height:auto;display:block;
   margin:0 auto;
+  animation:ab-float 5s ease-in-out infinite;
+  -webkit-mask-image:radial-gradient(ellipse 78% 88% at 50% 52%, black 55%, transparent 100%);
+  mask-image:radial-gradient(ellipse 78% 88% at 50% 52%, black 55%, transparent 100%);
 }
 @keyframes ab-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 .about-visual{
