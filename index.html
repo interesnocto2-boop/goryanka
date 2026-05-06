@@ -205,38 +205,13 @@ h2.sec-title{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:900;color:var(--dark
 .sec-desc{font-size:.95rem;color:var(--gray);line-height:1.7;max-width:520px;margin-bottom:40px}
 
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-.about-bottle-card{
-  border-radius:28px;
-  background:linear-gradient(160deg,#03045e 0%,#0077b6 65%,#00b4d8 100%);
-  box-shadow:0 28px 72px rgba(0,0,0,.35);
-  display:flex;align-items:center;justify-content:center;
-  position:relative;overflow:hidden;min-height:380px;
-  padding:40px 32px;
+.about-bottle-img{
+  width:100%;max-width:460px;height:auto;display:block;
+  filter:drop-shadow(0 24px 48px rgba(0,100,180,.2));
+  animation:ab-float 5s ease-in-out infinite;
+  margin:0 auto;
 }
-.about-bottle-card .ab-blob{
-  position:absolute;border-radius:50%;pointer-events:none;
-}
-.about-bottle-card .ab-blob1{
-  width:280px;height:280px;
-  background:rgba(0,180,216,.18);
-  top:-80px;right:-80px;
-}
-.about-bottle-card .ab-blob2{
-  width:200px;height:200px;
-  background:rgba(144,224,239,.12);
-  bottom:-60px;left:-60px;
-}
-.about-bottle-card .ab-wave{
-  position:absolute;bottom:0;left:0;right:0;line-height:0;pointer-events:none;
-}
-.about-bottle-card .ab-wave svg{width:100%;height:60px;display:block}
-.about-bottle-card img{
-  position:relative;z-index:2;
-  height:300px;width:auto;object-fit:contain;
-  filter:drop-shadow(0 20px 40px rgba(0,0,0,.5));
-  animation:ab-float 4s ease-in-out infinite;
-}
-@keyframes ab-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes ab-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 .about-visual{
   border-radius:24px;overflow:hidden;
   box-shadow:0 20px 56px rgba(0,119,182,.3);
@@ -589,8 +564,7 @@ footer ul li a:hover{color:var(--white)}
 
   .about{padding:44px 4%}
   .about-grid{grid-template-columns:1fr}
-  .about-bottle-card{min-height:260px;padding:28px 24px}
-  .about-bottle-card img{height:220px}
+  .about-bottle-img{max-width:300px}
   .sec-desc{font-size:.88rem}
 
   .why{padding:44px 4%}
@@ -825,17 +799,7 @@ footer ul li a:hover{color:var(--white)}
 <section class="about">
   <div class="container">
     <div class="about-grid">
-      <div class="about-bottle-card">
-        <div class="ab-blob ab-blob1"></div>
-        <div class="ab-blob ab-blob2"></div>
-        <img src="bottle.jpg" alt="Горянка — бутыль 19л"/>
-        <div class="ab-wave">
-          <svg viewBox="0 0 400 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0,30 C100,55 300,5 400,30 L400,60 L0,60 Z" fill="rgba(0,180,216,.25)"/>
-            <path d="M0,40 C120,65 280,15 400,40 L400,60 L0,60 Z" fill="rgba(0,119,182,.2)"/>
-          </svg>
-        </div>
-      </div>
+      <img src="bottle.jpg" alt="Горянка — бутыль 19л" class="about-bottle-img"/>
       <div>
         <div class="eyebrow">О нашей воде</div>
         <h2 class="sec-title">Вода из сердца гор</h2>
