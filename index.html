@@ -17,6 +17,9 @@
 <link rel="preconnect" href="https://unpkg.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
 <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/></noscript>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://api.telegram.org; frame-src https://yandex.ru;"/>
+<meta http-equiv="X-Content-Type-Options" content="nosniff"/>
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin"/>
 <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -729,6 +732,7 @@ footer ul li a:hover{color:var(--white)}
         <div class="fg">
           <label>Комментарий к заказу</label>
           <textarea name="comment" placeholder="Например: бутыли у двери, можете просто заменить"></textarea>
+          <input name="website" type="text" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;height:0;width:0;opacity:0;" aria-hidden="true"/>
         </div>
 
         <!-- ДАТА -->
@@ -1163,6 +1167,7 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
   e.preventDefault()
   const btn=this.querySelector('.btn-submit')
   const d=new FormData(this)
+  if((d.get('website')||'').trim()){return}
   const name=(d.get('name')||'').trim()
   const phone=(d.get('phone')||'').trim()
   const street=(d.get('street')||'').trim()
