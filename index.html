@@ -596,6 +596,67 @@ footer ul li a:hover{color:var(--white)}
   .form-card{padding:12px 11px 10px}
   .tchip{min-height:44px}
 }
+/* ── CABINET ── */
+.cabinet-btn{
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+  border-radius:50px;padding:8px 14px;cursor:pointer;
+  display:flex;align-items:center;gap:6px;color:#fff;font-size:.85rem;font-weight:600;
+  transition:background .2s;font-family:inherit;flex-shrink:0;
+}
+.cabinet-btn:hover{background:rgba(255,255,255,.22)}
+.cabinet-btn .ic{width:18px;height:18px}
+.cabinet-btn .ic svg{width:16px;height:16px;stroke:#fff}
+@media(max-width:768px){.cab-nav-label{display:none}.cabinet-btn{padding:8px 10px}}
+.cabinet{
+  background:var(--white);border-radius:24px;
+  max-width:480px;width:100%;
+  max-height:90vh;overflow-y:auto;
+  animation:pop .3s cubic-bezier(.34,1.56,.64,1);
+}
+.cabinet-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px 16px;border-bottom:1px solid #e2e8f0;
+  position:sticky;top:0;background:#fff;z-index:1;border-radius:24px 24px 0 0;
+}
+.cabinet-header h3{font-size:1.1rem;font-weight:800;color:var(--dark)}
+.cabinet-close{
+  background:none;border:none;cursor:pointer;font-size:1.2rem;
+  color:var(--gray);width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;transition:background .2s;
+}
+.cabinet-close:hover{background:#f1f5f9}
+.cabinet-screen{padding:24px}
+.cabinet-icon{font-size:3rem;text-align:center;margin-bottom:12px}
+.cabinet-desc{text-align:center;color:var(--gray);font-size:.9rem;margin-bottom:20px;line-height:1.5}
+.cabinet-user-row{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #e2e8f0;
+}
+.cabinet-user-phone{font-size:.9rem;font-weight:600;color:var(--dark)}
+.cabinet-logout{
+  background:none;border:1px solid #e2e8f0;border-radius:8px;
+  padding:6px 12px;font-size:.78rem;color:var(--gray);cursor:pointer;font-family:inherit;
+  transition:all .2s;
+}
+.cabinet-logout:hover{border-color:#fca5a5;color:#ef4444;background:#fef2f2}
+.cabinet-empty{text-align:center;padding:32px 0;color:var(--gray);font-size:.9rem}
+.cabinet-loading{text-align:center;padding:32px 0;color:var(--gray)}
+.cab-order{
+  border:1.5px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;
+  transition:all .2s;
+}
+.cab-order:hover{border-color:#bbf7d0;box-shadow:0 4px 16px rgba(22,163,74,.08)}
+.cab-order-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.cab-order-id{font-size:1rem;font-weight:800;color:var(--blue)}
+.cab-status{font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:50px}
+.cab-status-new{background:#f1f5f9;color:#64748b}
+.cab-status-confirmed{background:#dcfce7;color:#16a34a}
+.cab-status-delivering{background:#fef3c7;color:#d97706}
+.cab-status-done{background:#dcfce7;color:#15803d;border:1px solid #86efac}
+.cab-status-cancelled{background:#fee2e2;color:#dc2626}
+.cab-order-addr{font-size:.83rem;color:var(--gray);margin-bottom:4px}
+.cab-order-meta{font-size:.78rem;color:#94a3b8}
+
 /* ── WHATSAPP FLOAT ── */
 .float-btns{position:fixed;bottom:24px;right:24px;z-index:200;display:flex;gap:12px}
 .float-wa{
@@ -625,6 +686,10 @@ footer ul li a:hover{color:var(--white)}
     <a href="#zone">Доставка</a>
     <a href="#orderForm">Заказать</a>
   </nav>
+  <button class="cabinet-btn" onclick="openCabinet()" aria-label="Мои заказы">
+    <div class="ic"><i data-lucide="user-circle"></i></div>
+    <span class="cab-nav-label">Мои заказы</span>
+  </button>
   <a href="https://t.me/Alik2xx" target="_blank" rel="noopener" class="header-phone">
     <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.17 14.148l-2.95-.924c-.641-.204-.654-.641.136-.954l11.522-4.44c.537-.194 1.006.131.684.418z"/></svg>
     <span class="ph-num">Написать нам</span>
@@ -1066,6 +1131,35 @@ footer ul li a:hover{color:var(--white)}
 </footer>
 
 
+<!-- CABINET MODAL -->
+<div class="modal-bg" id="cabinetModal">
+  <div class="cabinet">
+    <div class="cabinet-header">
+      <h3>Мои заказы</h3>
+      <button class="cabinet-close" onclick="closeCabinet()" aria-label="Закрыть">✕</button>
+    </div>
+    <div id="cabinetLogin" class="cabinet-screen">
+      <div class="cabinet-icon">📦</div>
+      <p class="cabinet-desc">Введите номер телефона, которым оформляли заказ — покажем историю доставок</p>
+      <div class="fg">
+        <label>Номер телефона</label>
+        <input type="tel" id="cabinetPhone" placeholder="+7 (906) 000-00-00" autocomplete="tel"
+          onkeydown="if(event.key==='Enter')cabinetLogin()"/>
+      </div>
+      <button class="btn-submit" style="animation:none;margin-top:4px" onclick="cabinetLogin()">Показать заказы →</button>
+    </div>
+    <div id="cabinetOrders" style="display:none">
+      <div class="cabinet-screen">
+        <div class="cabinet-user-row">
+          <span class="cabinet-user-phone" id="cabinetUserPhone"></span>
+          <button class="cabinet-logout" onclick="cabinetLogout()">Выйти</button>
+        </div>
+        <div id="cabinetOrdersList"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- MODAL -->
 <div class="modal-bg" id="modal">
   <div class="modal">
@@ -1215,6 +1309,60 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
     btn.disabled=false;btn.textContent='🚚 Оформить доставку →'
   }
 })
+
+// ── Личный кабинет ──
+const CAB_STATUSES={new:'Новая',confirmed:'Подтверждена',delivering:'В пути',done:'Доставлена',cancelled:'Отменена'}
+const CAB_STATUS_CSS={new:'cab-status-new',confirmed:'cab-status-confirmed',delivering:'cab-status-delivering',done:'cab-status-done',cancelled:'cab-status-cancelled'}
+
+function openCabinet(){
+  document.getElementById('cabinetModal').classList.add('show')
+  const phone=(JSON.parse(lsGet('goryankaUser','{}')).phone||'').trim()
+  if(phone&&validPhone(phone)){
+    showCabinetOrders(phone)
+  }else{
+    document.getElementById('cabinetLogin').style.display='block'
+    document.getElementById('cabinetOrders').style.display='none'
+    setTimeout(()=>document.getElementById('cabinetPhone').focus(),100)
+  }
+}
+function closeCabinet(){document.getElementById('cabinetModal').classList.remove('show')}
+document.getElementById('cabinetModal').addEventListener('click',function(e){if(e.target===this)closeCabinet()})
+
+function cabinetLogin(){
+  const phone=document.getElementById('cabinetPhone').value.trim()
+  if(!phone||!validPhone(phone)){alert('Введите корректный номер телефона');return}
+  showCabinetOrders(phone)
+}
+
+async function showCabinetOrders(phone){
+  document.getElementById('cabinetLogin').style.display='none'
+  document.getElementById('cabinetOrders').style.display='block'
+  document.getElementById('cabinetUserPhone').textContent=phone
+  const list=document.getElementById('cabinetOrdersList')
+  list.innerHTML='<div class="cabinet-loading">Загружаем заказы...</div>'
+  try{
+    const r=await fetch(`https://api.goryanka05.ru/api/client/orders?phone=${encodeURIComponent(phone)}`)
+    if(!r.ok)throw new Error()
+    const orders=await r.json()
+    if(!orders.length){list.innerHTML='<div class="cabinet-empty">По этому номеру заказов не найдено</div>';return}
+    list.innerHTML=orders.map(o=>`
+      <div class="cab-order">
+        <div class="cab-order-top">
+          <span class="cab-order-id">#${escXSS(String(o.id))}</span>
+          <span class="cab-status ${CAB_STATUS_CSS[o.status]||'cab-status-new'}">${escXSS(CAB_STATUSES[o.status]||o.status)}</span>
+        </div>
+        <div class="cab-order-addr">${escXSS(o.address)}</div>
+        <div class="cab-order-meta">${escXSS(o.quantity)} · ${escXSS(o.date)} · ${escXSS(o.created_at.slice(0,16).replace('T',' '))}</div>
+      </div>
+    `).join('')
+  }catch{list.innerHTML='<div class="cabinet-empty">Ошибка загрузки. Попробуйте позже.</div>'}
+}
+
+function cabinetLogout(){
+  document.getElementById('cabinetOrders').style.display='none'
+  document.getElementById('cabinetLogin').style.display='block'
+  document.getElementById('cabinetPhone').value=''
+}
 
 // fade-in on scroll
 const obs=new IntersectionObserver(entries=>{
