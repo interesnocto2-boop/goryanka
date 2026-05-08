@@ -1113,7 +1113,7 @@ const days=['Вс','Пн','Вт','Ср','Чт','Пт','Сб']
 const months=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек']
 ;(function(){
   const wrap=document.getElementById('dateChips')
-  for(let i=0;i<7;i++){
+  for(let i=0;i<2;i++){
     const d=new Date();d.setDate(d.getDate()+i)
     const label=i===0?'Сегодня':i===1?'Завтра':`${days[d.getDay()]} ${d.getDate()} ${months[d.getMonth()]}`
     const val=`${d.getDate()} ${months[d.getMonth()]}`
