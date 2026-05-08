@@ -710,6 +710,10 @@ footer ul li a:hover{color:var(--white)}
             <input type="text" name="entrance" placeholder="2"/>
           </div>
           <div class="fg">
+            <label>Этаж</label>
+            <input type="text" name="floor" placeholder="3"/>
+          </div>
+          <div class="fg">
             <label>Квартира</label>
             <input type="text" name="apartment" placeholder="15"/>
           </div>
@@ -1135,6 +1139,7 @@ const months=['янв','фев','мар','апр','май','июн','июл','а
   if(saved.phone)document.querySelector('[name=phone]').value=saved.phone
   if(saved.street)document.querySelector('[name=street]').value=saved.street
   if(saved.entrance)document.querySelector('[name=entrance]').value=saved.entrance
+  if(saved.floor)document.querySelector('[name=floor]').value=saved.floor
   if(saved.apartment)document.querySelector('[name=apartment]').value=saved.apartment
   }catch{}
 })()
@@ -1158,6 +1163,7 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
   const phone=(d.get('phone')||'').trim()
   const street=(d.get('street')||'').trim()
   const entrance=(d.get('entrance')||'').trim()
+  const floor=(d.get('floor')||'').trim()
   const apartment=(d.get('apartment')||'').trim()
   const comment=(d.get('comment')||'').trim()
   const qty=d.get('qty')||''
@@ -1179,7 +1185,7 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
 
   btn.disabled=true;btn.textContent='Отправляем...'
   try{
-    const addrFull=[street,entrance?'подъезд '+entrance:'',apartment?'кв. '+apartment:''].filter(Boolean).join(', ')
+    const addrFull=[street,entrance?'подъезд '+entrance:'',floor?'этаж '+floor:'',apartment?'кв. '+apartment:''].filter(Boolean).join(', ')
     const msg=`🌊 Новая заявка — Горянка\n\n`+
       `👤 Имя: ${name}\n`+
       `📞 Телефон: ${phone}\n`+
@@ -1195,7 +1201,7 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
     })
     if(!r.ok)throw new Error()
     lsSet('goryankaLastOrder',Date.now())
-    lsSet('goryankaUser',JSON.stringify({name,phone,street,entrance,apartment}))
+    lsSet('goryankaUser',JSON.stringify({name,phone,street,entrance,floor,apartment}))
     document.getElementById('modal').classList.add('show')
     this.reset()
     try{const saved=JSON.parse(lsGet('goryankaUser','{}'))
@@ -1203,6 +1209,7 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
       if(saved.phone)document.querySelector('[name=phone]').value=saved.phone
       if(saved.street)document.querySelector('[name=street]').value=saved.street
       if(saved.entrance)document.querySelector('[name=entrance]').value=saved.entrance
+      if(saved.floor)document.querySelector('[name=floor]').value=saved.floor
       if(saved.apartment)document.querySelector('[name=apartment]').value=saved.apartment
     }catch{}
     document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'))
