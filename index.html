@@ -13,6 +13,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💧</text></svg>"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -27,6 +28,19 @@
   --water:#0ea5e9;
 }
 html{scroll-behavior:smooth}
+.ic{display:flex;align-items:center;justify-content:center}
+.ic svg{width:20px;height:20px;stroke:currentColor;stroke-width:1.75;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.bullet-icon .ic svg{width:18px;height:18px}
+.feat-icon .ic svg{width:20px;height:20px}
+.why-icon .ic{margin-bottom:14px;width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#dcfce7,#bbf7d0)}
+.why-icon .ic svg{width:22px;height:22px;stroke:var(--blue-dark)}
+.price-icon .ic{width:52px;height:52px;border-radius:16px;background:rgba(255,255,255,.15)}
+.price-icon .ic svg{width:26px;height:26px;stroke:#fff}
+.price-popular .price-icon .ic{background:rgba(255,255,255,.2)}
+.doc-icon .ic svg{width:24px;height:24px;stroke:var(--blue)}
+.zone-fact-icon .ic{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--accent));flex-shrink:0}
+.zone-fact-icon .ic svg{width:18px;height:18px;stroke:#fff}
+.benefit-item .ic svg{width:22px;height:22px;stroke:var(--blue)}
 body{font-family:'Inter',sans-serif;color:#1e293b;background:var(--white);overflow-x:hidden}
 
 /* ── HEADER ── */
@@ -634,19 +648,19 @@ footer ul li a:hover{color:var(--white)}
 
       <div class="bullets">
         <div class="bullet">
-          <div class="bullet-icon">🏔</div>
+          <div class="bullet-icon"><div class="ic"><i data-lucide="mountain"></i></div></div>
           Добывается в горах села Канцил
         </div>
         <div class="bullet">
-          <div class="bullet-icon">🌿</div>
+          <div class="bullet-icon"><div class="ic"><i data-lucide="leaf"></i></div></div>
           Без хлора и химических добавок
         </div>
         <div class="bullet">
-          <div class="bullet-icon">🚚</div>
+          <div class="bullet-icon"><div class="ic"><i data-lucide="truck"></i></div></div>
           Быстрая доставка до двери
         </div>
         <div class="bullet">
-          <div class="bullet-icon">📞</div>
+          <div class="bullet-icon"><div class="ic"><i data-lucide="phone"></i></div></div>
           Перезвоним и согласуем доставку
         </div>
       </div>
@@ -659,7 +673,7 @@ footer ul li a:hover{color:var(--white)}
     <!-- RIGHT: FORM -->
     <div class="form-card">
       <div class="form-card-top">
-        <div class="form-card-icon">💧</div>
+        <div class="form-card-icon"><div class="ic"><i data-lucide="droplets"></i></div></div>
         <h2>Заказать воду</h2>
       </div>
       <p class="fc-sub">Оставьте заявку — перезвоним и согласуем доставку</p>
@@ -706,12 +720,12 @@ footer ul li a:hover{color:var(--white)}
 
         <!-- ДАТА -->
         <div class="fg-chips">
-          <span class="chips-label">📅 Дата доставки</span>
+          <span class="chips-label">Дата доставки</span>
           <div class="chips-row" id="dateChips"></div>
         </div>
 
         <button type="submit" class="btn-submit">🚚 Оформить доставку →</button>
-        <div class="form-trust">🔒 Данные защищены · Не передаём третьим лицам</div>
+        <div class="form-trust">🔒 Данные защищены</div>
       </form>
     </div>
 
@@ -728,20 +742,20 @@ footer ul li a:hover{color:var(--white)}
 <div class="benefits-strip">
   <div class="benefits-inner">
     <div class="benefit-item">
-      <span>🏔</span>
+      <div class="ic"><i data-lucide="mountain"></i></div>
       <div>Горный источник <small>село Канцил</small></div>
     </div>
     <div class="benefit-item">
-      <span>🌿</span>
+      <div class="ic"><i data-lucide="leaf"></i></div>
       <div>Без химии <small>100% природная</small></div>
     </div>
     <div class="benefit-item">
-      <span>🚚</span>
+      <div class="ic"><i data-lucide="truck"></i></div>
       <div>Быстрая доставка <small>до вашей двери</small></div>
     </div>
     <div class="benefit-item">
-      <span>📞</span>
-      <div>Ответим за 15 мин <small>ежедневно 9:00–17:00</small></div>
+      <div class="ic"><i data-lucide="phone"></i></div>
+      <div>Перезвоним <small>ежедневно 9:00–17:00</small></div>
     </div>
   </div>
 </div>
@@ -754,7 +768,7 @@ footer ul li a:hover{color:var(--white)}
     <p class="sec-desc">Производство лицензировано, вода сертифицирована. Все документы в открытом доступе.</p>
     <div class="docs-grid">
       <a class="doc-card" href="docs/%D0%A1%D0%B5%D1%80%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%82_%D1%81%D0%BE%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D1%81%D1%82%D0%B2%D0%B8%D1%8F.jpg" target="_blank" rel="noopener">
-        <div class="doc-icon">🏅</div>
+        <div class="doc-icon"><div class="ic"><i data-lucide="award"></i></div></div>
         <div class="doc-body">
           <div class="doc-title">Сертификат соответствия</div>
           <div class="doc-sub">№ РОСС RU.ПБ44.Н17339 · действует до 30.05.2027</div>
@@ -762,7 +776,7 @@ footer ul li a:hover{color:var(--white)}
         <div class="doc-arrow">→</div>
       </a>
       <a class="doc-card" href="docs/%D0%94%D0%B5%D0%BA%D0%BB%D0%B0%D1%80%D0%B0%D1%86%D0%B8%D1%8F%20%D0%BE%20%D1%81%D0%BE%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D1%81%D1%82%D0%B2%D0%B8%D0%B8.pdf" target="_blank" rel="noopener">
-        <div class="doc-icon">📋</div>
+        <div class="doc-icon"><div class="ic"><i data-lucide="clipboard-list"></i></div></div>
         <div class="doc-body">
           <div class="doc-title">Декларация о соответствии</div>
           <div class="doc-sub">Соответствие продукции стандартам качества</div>
@@ -770,7 +784,7 @@ footer ul li a:hover{color:var(--white)}
         <div class="doc-arrow">→</div>
       </a>
       <a class="doc-card" href="docs/%D0%97%D0%90%D0%9A%D0%9B%D0%AE%D0%A7%D0%95%D0%9D%D0%98%D0%95_%D0%A0%D0%BE%D1%81%D0%BF%D0%BE%D1%82%D1%80%D0%B5%D0%B1%D0%BD%D0%B0%D0%B4%D0%B7%D0%BE%D1%80%D0%B0_%D0%BD%D0%B0_%D1%81%D0%BA%D0%B2%D0%B0%D0%B6%D0%B8%D0%BD%D1%83.pdf" target="_blank" rel="noopener">
-        <div class="doc-icon">🏛</div>
+        <div class="doc-icon"><div class="ic"><i data-lucide="landmark"></i></div></div>
         <div class="doc-body">
           <div class="doc-title">Заключение Роспотребнадзора</div>
           <div class="doc-sub">Санитарно-эпидемиологическое заключение на скважину</div>
@@ -778,7 +792,7 @@ footer ul li a:hover{color:var(--white)}
         <div class="doc-arrow">→</div>
       </a>
       <a class="doc-card" href="docs/%D0%9B%D0%98%D0%A6%D0%95%D0%9D%D0%97%D0%98%D0%AF%20%D0%9C%D0%B8%D0%BD%D0%BF%D1%80%D0%B8%D1%80%D0%BE%D0%B4%D1%8B%20%D0%BD%D0%B0%20%D1%81%D0%BA%D0%B2%D0%B0%D0%B6%D0%B8%D0%BD%D1%83.pdf" target="_blank" rel="noopener">
-        <div class="doc-icon">📜</div>
+        <div class="doc-icon"><div class="ic"><i data-lucide="scroll-text"></i></div></div>
         <div class="doc-body">
           <div class="doc-title">Лицензия Минприроды на скважину</div>
           <div class="doc-sub">Лицензия на пользование недрами</div>
@@ -786,7 +800,7 @@ footer ul li a:hover{color:var(--white)}
         <div class="doc-arrow">→</div>
       </a>
       <a class="doc-card" href="docs/%D0%9B%D0%98%D0%A6%D0%95%D0%9D%D0%97%D0%98%D0%AF_%D1%81%D0%BE%D0%BA%D1%80%D0%B0%D1%89%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D0%9C%D0%B8%D0%BD%D0%BF%D1%80%D0%B8%D1%80%D0%BE%D0%B4%D1%8B_%D0%BD%D0%B0_%D1%81%D0%BA%D0%B2%D0%B0%D0%B6%D0%B8%D0%BD%D1%83.pdf" target="_blank" rel="noopener">
-        <div class="doc-icon">📄</div>
+        <div class="doc-icon"><div class="ic"><i data-lucide="file-text"></i></div></div>
         <div class="doc-body">
           <div class="doc-title">Лицензия Минприроды (сокращённая)</div>
           <div class="doc-sub">Краткая версия лицензии на скважину</div>
@@ -808,28 +822,28 @@ footer ul li a:hover{color:var(--white)}
         <p class="sec-desc">Горянка — вода, которая проходит естественную фильтрацию через горные породы, накапливая полезные минералы. Добывается в экологически чистом районе.</p>
         <div class="features">
           <div class="feat">
-            <div class="feat-icon">🏔</div>
+            <div class="feat-icon"><div class="ic"><i data-lucide="mountain-snow"></i></div></div>
             <div>
               <h4>Горный источник</h4>
               <p>Добывается в экологически чистом районе — в селе Канцил, вдали от промышленных зон.</p>
             </div>
           </div>
           <div class="feat">
-            <div class="feat-icon">🌿</div>
+            <div class="feat-icon"><div class="ic"><i data-lucide="filter"></i></div></div>
             <div>
               <h4>Природная фильтрация</h4>
               <p>Вода проходит сквозь горные породы годами. Никакой химической обработки.</p>
             </div>
           </div>
           <div class="feat">
-            <div class="feat-icon">💎</div>
+            <div class="feat-icon"><div class="ic"><i data-lucide="droplets"></i></div></div>
             <div>
               <h4>Негазированная артезианская</h4>
               <p>Добывается из артезианской скважины. Без газа, без обработки — такой, какой создала природа.</p>
             </div>
           </div>
           <div class="feat">
-            <div class="feat-icon">⚗️</div>
+            <div class="feat-icon"><div class="ic"><i data-lucide="sparkles"></i></div></div>
             <div>
               <h4>Богата минералами</h4>
               <p>Природный баланс кальция, магния и калия — именно то, что нужно организму.</p>
@@ -849,7 +863,7 @@ footer ul li a:hover{color:var(--white)}
     <div class="pricing-grid">
       <div class="price-card price-popular">
         <div class="price-badge">Выгодно</div>
-        <div class="price-icon">🔄</div>
+        <div class="price-icon"><div class="ic"><i data-lucide="refresh-cw"></i></div></div>
         <div class="price-title">С заменой бутыли</div>
         <div class="price-desc">Привозим полную — забираем пустую. Не нужно думать о бутылях.</div>
         <div class="price-amount">300 <span>₽</span></div>
@@ -857,7 +871,7 @@ footer ul li a:hover{color:var(--white)}
         <a href="#" class="price-btn" onclick="document.getElementById('orderForm').scrollIntoView({behavior:'smooth'});return false">Заказать →</a>
       </div>
       <div class="price-card">
-        <div class="price-icon">🏠</div>
+        <div class="price-icon"><div class="ic"><i data-lucide="home"></i></div></div>
         <div class="price-title">С выкупом бутыли</div>
         <div class="price-desc">Бутыль остаётся у вас. Удобно при первом заказе или для запаса.</div>
         <div class="price-amount">850 <span>₽</span></div>
@@ -874,12 +888,12 @@ footer ul li a:hover{color:var(--white)}
     <div class="eyebrow">Почему Горянка</div>
     <h2 class="sec-title">Наши преимущества</h2>
     <div class="why-grid">
-      <div class="why-card"><div class="why-icon">🏔</div><h3>Настоящая горная</h3><p>Вода из гор Канцила, не с завода. Вы получаете то, что создала сама природа.</p></div>
-      <div class="why-card"><div class="why-icon">🚚</div><h3>Быстрая доставка</h3><p>Привезём воду прямо к вашей двери в удобное время.</p></div>
-      <div class="why-card"><div class="why-icon">🧪</div><h3>Без химии</h3><p>Никакой хлорки и консервантов. Только чистая природная вода.</p></div>
-      <div class="why-card"><div class="why-icon">💰</div><h3>Честная цена</h3><p>Горная вода высшего качества по доступной цене без переплат.</p></div>
-      <div class="why-card"><div class="why-icon">📱</div><h3>Удобный заказ</h3><p>Сайт или WhatsApp — ответим быстро и согласуем доставку.</p></div>
-      <div class="why-card"><div class="why-icon">🌿</div><h3>Эко-источник</h3><p>Источник в чистом горном районе, вдали от промышленного загрязнения.</p></div>
+      <div class="why-card"><div class="why-icon"><div class="ic"><i data-lucide="mountain-snow"></i></div></div><h3>Настоящая горная</h3><p>Вода из гор Канцила, не с завода. Вы получаете то, что создала сама природа.</p></div>
+      <div class="why-card"><div class="why-icon"><div class="ic"><i data-lucide="truck"></i></div></div><h3>Быстрая доставка</h3><p>Привезём воду прямо к вашей двери в удобное время.</p></div>
+      <div class="why-card"><div class="why-icon"><div class="ic"><i data-lucide="shield-check"></i></div></div><h3>Без химии</h3><p>Никакой хлорки и консервантов. Только чистая природная вода.</p></div>
+      <div class="why-card"><div class="why-icon"><div class="ic"><i data-lucide="badge-percent"></i></div></div><h3>Честная цена</h3><p>Горная вода высшего качества по доступной цене без переплат.</p></div>
+      <div class="why-card"><div class="why-icon"><div class="ic"><i data-lucide="smartphone"></i></div></div><h3>Удобный заказ</h3><p>Сайт или WhatsApp — ответим быстро и согласуем доставку.</p></div>
+      <div class="why-card"><div class="why-icon"><div class="ic"><i data-lucide="leaf"></i></div></div><h3>Эко-источник</h3><p>Источник в чистом горном районе, вдали от промышленного загрязнения.</p></div>
     </div>
   </div>
 </section>
@@ -937,7 +951,7 @@ footer ul li a:hover{color:var(--white)}
       </div>
       <div class="zone-info">
         <div class="zone-city-card">
-          <div class="zone-city-icon">📍</div>
+          <div class="zone-city-icon"><div class="ic" style="width:40px;height:40px"><i data-lucide="map-pin"></i></div></div>
           <div>
             <div class="zone-city-name">Каспийск</div>
             <div class="zone-city-sub">Вся территория города</div>
@@ -946,21 +960,21 @@ footer ul li a:hover{color:var(--white)}
         </div>
         <div class="zone-facts">
           <div class="zone-fact">
-            <div class="zone-fact-icon">🚚</div>
+            <div class="zone-fact-icon"><div class="ic"><i data-lucide="truck"></i></div></div>
             <div>
               <div class="zone-fact-title">Бесплатная доставка</div>
               <div class="zone-fact-sub">До вашей двери, без минималки</div>
             </div>
           </div>
           <div class="zone-fact">
-            <div class="zone-fact-icon">⏱</div>
+            <div class="zone-fact-icon"><div class="ic"><i data-lucide="clock"></i></div></div>
             <div>
               <div class="zone-fact-title">Ежедневно 9:00–17:00</div>
               <div class="zone-fact-sub">Перезвоним и согласуем время</div></div>
             </div>
           </div>
           <div class="zone-fact">
-            <div class="zone-fact-icon">📞</div>
+            <div class="zone-fact-icon"><div class="ic"><i data-lucide="phone"></i></div></div>
             <div>
               <div class="zone-fact-title">+7 (906) 066-64-62</div>
               <div class="zone-fact-sub">Звоните или пишите в WhatsApp</div>
@@ -1015,7 +1029,7 @@ footer ul li a:hover{color:var(--white)}
     <div class="footer-top">
       <div>
         <a href="#" class="f-logo">
-          <div class="logo-icon" style="background:rgba(255,255,255,.15)">💧</div>
+          <div class="logo-icon" style="background:rgba(255,255,255,.15)"><div class="ic"><i data-lucide="droplets"></i></div></div>
           <div class="logo-text" style="color:var(--white)">Горян<span style="color:var(--blue-light)">ка</span></div>
         </a>
         <p class="f-desc">Натуральная горная вода из экологически чистого источника в селе Канцил.</p>
@@ -1211,6 +1225,7 @@ document.querySelectorAll('.why-card,.feat,.benefit-item').forEach(el=>{
   el.style.cssText+='opacity:0;transform:translateY(20px);transition:opacity .45s ease,transform .45s ease'
   obs.observe(el)
 })
+lucide.createIcons()
 </script>
 </body>
 </html>
