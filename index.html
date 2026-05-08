@@ -136,6 +136,8 @@ header{
   transition:transform .2s,box-shadow .2s;
 }
 .wa-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,.5)}
+.tg-btn{background:#229ed9;box-shadow:0 6px 20px rgba(34,158,217,.4)}
+.tg-btn:hover{box-shadow:0 10px 28px rgba(34,158,217,.5)}
 
 /* RIGHT: form card */
 .form-card{
@@ -626,8 +628,9 @@ footer ul li a:hover{color:var(--white)}
     <a href="#zone">Доставка</a>
     <a href="#orderForm">Заказать</a>
   </nav>
-  <a href="tel:+79060666462" class="header-phone">
-    📞 <span class="ph-num">+7 (906) 066-64-62</span>
+  <a href="https://t.me/VodaKaspi05_bot" target="_blank" rel="noopener" class="header-phone">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.17 14.148l-2.95-.924c-.641-.204-.654-.641.136-.954l11.522-4.44c.537-.194 1.006.131.684.418z"/></svg>
+    <span class="ph-num">Написать нам</span>
   </a>
 </header>
 
@@ -661,14 +664,20 @@ footer ul li a:hover{color:var(--white)}
           Быстрая доставка до двери
         </div>
         <div class="bullet">
-          <div class="bullet-icon"><div class="ic"><i data-lucide="phone"></i></div></div>
-          Перезвоним и согласуем доставку
+          <div class="bullet-icon"><div class="ic"><i data-lucide="message-circle"></i></div></div>
+          Пишите в Telegram или WhatsApp
         </div>
       </div>
 
-      <a href="https://wa.me/79060666462" class="wa-btn" target="_blank">
-        💬 Написать в WhatsApp
-      </a>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="https://t.me/VodaKaspi05_bot" class="wa-btn tg-btn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="flex-shrink:0"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.17 14.148l-2.95-.924c-.641-.204-.654-.641.136-.954l11.522-4.44c.537-.194 1.006.131.684.418z"/></svg>
+          Написать в Telegram
+        </a>
+        <a href="https://wa.me/79060666462" class="wa-btn" target="_blank" rel="noopener" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3)">
+          💬 WhatsApp
+        </a>
+      </div>
     </div>
 
     <!-- RIGHT: FORM -->
@@ -979,8 +988,8 @@ footer ul li a:hover{color:var(--white)}
           <div class="zone-fact">
             <div class="zone-fact-icon"><div class="ic"><i data-lucide="phone"></i></div></div>
             <div>
-              <div class="zone-fact-title">+7 (906) 066-64-62</div>
-              <div class="zone-fact-sub">Звоните или пишите в WhatsApp</div>
+              <div class="zone-fact-title">Telegram / WhatsApp</div>
+              <div class="zone-fact-sub">Пишите — ответим быстро</div>
             </div>
           </div>
         </div>
@@ -1048,7 +1057,7 @@ footer ul li a:hover{color:var(--white)}
       <div>
         <h4>Контакты</h4>
         <ul>
-          <li><a href="tel:+79060666462">+7 (906) 066-64-62</a></li>
+          <li><a href="https://t.me/VodaKaspi05_bot" target="_blank">Telegram</a></li>
           <li><a href="https://wa.me/79060666462" target="_blank">WhatsApp</a></li>
           <li><a href="#">Ежедневно 9:00–17:00</a></li>
         </ul>
@@ -1215,7 +1224,7 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
     document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'))
     selDate='';selDateIso=''
   }catch{
-    alert('Ошибка отправки. Позвоните нам: +7 (906) 066-64-62')
+    alert('Ошибка отправки. Напишите нам в Telegram: @VodaKaspi05_bot')
   }finally{
     btn.disabled=false;btn.textContent='🚚 Оформить доставку →'
   }
