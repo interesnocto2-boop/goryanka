@@ -211,7 +211,10 @@ header{
 .benefit-item div small{display:block;font-weight:400;color:var(--gray);font-size:.75rem}
 
 /* ── ABOUT ── */
-.about{background:var(--white);padding:80px 5%}
+.about{background:var(--white);padding:0;display:grid;grid-template-columns:1fr 1fr;min-height:640px}
+.about-img-col{position:relative;overflow:hidden;min-height:480px}
+.about-img-col img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.about-text-col{padding:72px 56px;display:flex;flex-direction:column;justify-content:center;background:var(--white)}
 .container{max-width:1200px;margin:0 auto}
 .eyebrow{
   display:inline-flex;align-items:center;gap:8px;
@@ -221,38 +224,6 @@ header{
 .eyebrow::before{content:'';width:20px;height:2px;background:var(--blue);border-radius:1px}
 h2.sec-title{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:900;color:var(--dark);letter-spacing:-.5px;margin-bottom:14px}
 .sec-desc{font-size:.95rem;color:var(--gray);line-height:1.7;max-width:520px;margin-bottom:40px}
-
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-.about-bottle-img{
-  width:100%;max-width:500px;height:auto;display:block;
-  margin:0 auto;
-  animation:ab-float 5s ease-in-out infinite;
-  -webkit-mask-image:
-    linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%),
-    linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%);
-  -webkit-mask-composite:destination-in;
-  mask-image:
-    linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%),
-    linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%);
-  mask-composite:intersect;
-}
-@keyframes ab-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-.about-visual{
-  border-radius:24px;overflow:hidden;
-  box-shadow:0 20px 56px rgba(22,163,74,.3);
-}
-.about-visual img{width:100%;height:auto;display:block}
-.about-logo-wrap{
-  background:none;
-  box-shadow:none;
-  display:flex;align-items:center;justify-content:center;
-  overflow:visible;
-}
-.about-logo-wrap img{
-  width:80%;max-width:360px;height:auto;
-  border-radius:50%;
-  box-shadow:0 20px 60px rgba(0,0,0,.25);
-}
 .about-visual-emoji{display:none}
 .about-visual-text{display:none}
 
@@ -587,9 +558,9 @@ footer ul li a:hover{color:var(--white)}
   .benefit-item:nth-child(3),.benefit-item:nth-child(4){border-bottom:none}
   .benefit-item div{font-size:.8rem}
 
-  .about{padding:44px 4%}
-  .about-grid{grid-template-columns:1fr}
-  .about-bottle-img{max-width:300px}
+  .about{grid-template-columns:1fr}
+  .about-img-col{min-height:300px}
+  .about-text-col{padding:40px 24px}
   .sec-desc{font-size:.88rem}
 
   .why{padding:44px 4%}
@@ -822,10 +793,10 @@ footer ul li a:hover{color:var(--white)}
 
 <!-- ABOUT -->
 <section class="about">
-  <div class="container">
-    <div class="about-grid">
-      <img src="bottle.jpg" alt="Горянка — бутыль 19л" class="about-bottle-img" loading="lazy" decoding="async"/>
-      <div>
+  <div class="about-img-col">
+    <img src="bottle.jpg" alt="Горянка — бутыль 19л" loading="lazy" decoding="async"/>
+  </div>
+  <div class="about-text-col">
         <div class="eyebrow">О нашей воде</div>
         <h2 class="sec-title">Вода высочайшей категории</h2>
         <p class="sec-desc">Горянка добывается из артезианских скважин глубиной более 150 метров в Южном Дагестане — Хивский район, село Конциль. Высокое качество гарантируется постоянным контролем.</p>
@@ -859,8 +830,6 @@ footer ul li a:hover{color:var(--white)}
             </div>
           </div>
         </div>
-      </div>
-    </div>
   </div>
 </section>
 
