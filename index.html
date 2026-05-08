@@ -604,8 +604,8 @@ footer ul li a:hover{color:var(--white)}
   text-decoration:none;
 }
 .float-wa:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,.6)}
-.float-tg{background:#0088cc !important;box-shadow:0 4px 20px rgba(0,136,204,.5)}
-.float-tg:hover{box-shadow:0 6px 28px rgba(0,136,204,.6)}
+.float-tg{width:56px;height:56px;border-radius:50%;background:#0088cc;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,136,204,.5);transition:transform .2s,box-shadow .2s;text-decoration:none}
+.float-tg:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(0,136,204,.6)}
 </style>
 </head>
 <body>
@@ -1247,7 +1247,7 @@ lucide.createIcons()
 
 <!-- WhatsApp float button -->
 <div class="float-btns">
-  <a href="https://t.me/Alik2xx" class="float-wa float-tg" target="_blank" rel="noopener" aria-label="Написать в Telegram">
+  <a href="https://t.me/Alik2xx" class="float-tg" target="_blank" rel="noopener" aria-label="Написать в Telegram">
     <svg viewBox="0 0 24 24" width="28" height="28" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.17 14.148l-2.95-.924c-.641-.204-.654-.641.136-.954l11.522-4.44c.537-.194 1.006.131.684.418z"/></svg>
   </a>
   <a href="https://wa.me/79060666462" class="float-wa" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
