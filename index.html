@@ -70,6 +70,9 @@ header{
   transition:background .2s;
 }
 .header-phone:hover{background:rgba(255,255,255,.22)}
+.header-nav{display:flex;align-items:center;gap:4px}
+.header-nav a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.85rem;font-weight:500;padding:6px 12px;border-radius:8px;transition:color .2s,background .2s}
+.header-nav a:hover{color:#fff;background:rgba(255,255,255,.1)}
 
 /* ── HERO + FORM (first fold) ── */
 .hero{
@@ -276,8 +279,9 @@ h2.sec-title{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:900;color:var(--dark
 .reviews{padding:80px 5%;background:var(--light)}
 .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
 .review-card{
-  padding:24px;border-radius:18px;background:var(--light);
+  padding:24px;border-radius:18px;background:var(--white);
   border:1.5px solid #e2e8f0;
+  box-shadow:0 2px 12px rgba(0,0,0,.06);
 }
 .review-stars{color:#f59e0b;font-size:1rem;margin-bottom:10px}
 .review-card{position:relative}
@@ -497,6 +501,7 @@ footer ul li a:hover{color:var(--white)}
   .logo-text{font-size:1.05rem}
   .header-phone{padding:6px 10px;font-size:.8rem;gap:4px}
   .ph-num{display:none}
+  .header-nav{display:none}
 
   /* ── Hero ── */
   .hero{
@@ -603,11 +608,15 @@ footer ul li a:hover{color:var(--white)}
     </div>
     <div class="logo-text">Горян<span>ка</span></div>
   </a>
-  <div style="display:flex;align-items:center;gap:10px">
-<a href="tel:+79060666462" class="header-phone">
-      📞 <span class="ph-num">+7 (906) 066-64-62</span>
-    </a>
-  </div>
+  <nav class="header-nav">
+    <a href="#pricing">Цены</a>
+    <a href="#docs">Документы</a>
+    <a href="#zone">Доставка</a>
+    <a href="#orderForm">Заказать</a>
+  </nav>
+  <a href="tel:+79060666462" class="header-phone">
+    📞 <span class="ph-num">+7 (906) 066-64-62</span>
+  </a>
 </header>
 
 <!-- ═══ HERO + FORM ═══ -->
@@ -741,7 +750,7 @@ footer ul li a:hover{color:var(--white)}
 </div>
 
 <!-- DOCS -->
-<section class="docs-section">
+<section class="docs-section" id="docs">
   <div class="container">
     <div class="eyebrow">Официальные документы</div>
     <h2 class="sec-title">Работаем легально</h2>
@@ -834,7 +843,7 @@ footer ul li a:hover{color:var(--white)}
 </section>
 
 <!-- PRICING -->
-<section class="pricing">
+<section class="pricing" id="pricing">
   <div class="container">
     <div class="eyebrow">Стоимость</div>
     <h2 class="sec-title">Цены на воду</h2>
@@ -911,7 +920,7 @@ footer ul li a:hover{color:var(--white)}
 </section>
 
 <!-- ZONE -->
-<section class="zone">
+<section class="zone" id="zone">
   <div class="container">
     <div class="eyebrow">Зона доставки</div>
     <h2 class="sec-title">Куда доставляем</h2>
@@ -1056,7 +1065,7 @@ footer ul li a:hover{color:var(--white)}
 <script>
 // ── Утилиты ──
 function escXSS(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-function validPhone(p){return /^(\+7|8|7)\d{10}$/.test(p.replace(/[\s\-\(\)]/g,''))}
+function validPhone(p){const d=p.replace(/[\s\-\(\)\+]/g,'');return /^(7|8)\d{10}$/.test(d)||/^\d{10}$/.test(d)}
 function lsGet(k,def=''){try{return localStorage.getItem(k)||def}catch{return def}}
 function lsSet(k,v){try{localStorage.setItem(k,v)}catch{}}
 
@@ -1092,7 +1101,7 @@ const days=['Вс','Пн','Вт','Ср','Чт','Пт','Сб']
 const months=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек']
 ;(function(){
   const wrap=document.getElementById('dateChips')
-  for(let i=0;i<2;i++){
+  for(let i=0;i<7;i++){
     const d=new Date();d.setDate(d.getDate()+i)
     const label=i===0?'Сегодня':i===1?'Завтра':`${days[d.getDay()]} ${d.getDate()} ${months[d.getMonth()]}`
     const val=`${d.getDate()} ${months[d.getMonth()]}`
