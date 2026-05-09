@@ -1095,6 +1095,39 @@ footer ul li a:hover{color:var(--white)}
   </div>
 </section>
 
+<!-- SEO TEXT SECTION -->
+<section style="padding:64px 5%;background:#fff">
+  <div class="container" style="max-width:860px">
+    <h2 class="sec-title" style="margin-bottom:20px">Доставка воды в Каспийске</h2>
+    <div style="font-size:.92rem;color:#475569;line-height:1.85;display:flex;flex-direction:column;gap:14px">
+      <p>«Горянка» — единственная служба доставки <strong>артезианской воды в Каспийске</strong>, которая работает напрямую с производителем. Вода добывается из скважины глубиной 150 метров в Хивском районе Дагестана, проходит многоступенчатую фильтрацию и поступает к вам в 19-литровых бутылях без посредников.</p>
+      <p>Мы доставляем <strong>питьевую воду по всему Каспийску</strong>: микрорайоны Огни, Приморский, Центральный, Новый город, а также частный сектор. Доставка бесплатная — без минимальной суммы заказа. Оставьте заявку на сайте или напишите в Telegram — перезвоним и согласуем удобное время.</p>
+      <p><strong>Заказать воду в Каспийске</strong> просто: выберите дату, укажите адрес, и мы привезём воду к вашей двери. Пустые бутыли забираем обратно — ничего не нужно везти самому. Оплата при получении: наличными или переводом.</p>
+      <p>Качество воды подтверждено официальными документами: сертификат соответствия РОСС RU.ПБ44.Н17339, санитарно-эпидемиологическое заключение Роспотребнадзора и лицензия Минприроды на скважину. Все документы в открытом доступе на нашем сайте.</p>
+      <p><strong>Доставка воды в Дагестане</strong> — «Горянка» работает ежедневно с 9:00 до 17:00 без выходных. Более 200 постоянных клиентов в Каспийске доверяют нам ежедневное снабжение чистой питьевой водой.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:32px">
+      <div style="background:#f0fdf4;border-radius:14px;padding:18px 20px;border:1.5px solid #bbf7d0">
+        <div style="font-weight:800;color:#0d3320;margin-bottom:4px">📍 Весь Каспийск</div>
+        <div style="font-size:.82rem;color:#64748b">Все микрорайоны, частный сектор, офисы</div>
+      </div>
+      <div style="background:#f0fdf4;border-radius:14px;padding:18px 20px;border:1.5px solid #bbf7d0">
+        <div style="font-weight:800;color:#0d3320;margin-bottom:4px">💧 19 л — от 300 ₽</div>
+        <div style="font-size:.82rem;color:#64748b">С заменой бутыли. Без минималки</div>
+      </div>
+      <div style="background:#f0fdf4;border-radius:14px;padding:18px 20px;border:1.5px solid #bbf7d0">
+        <div style="font-weight:800;color:#0d3320;margin-bottom:4px">🏔 Скважина 150 м</div>
+        <div style="font-size:.82rem;color:#64748b">Хивский район, село Конциль</div>
+      </div>
+      <div style="background:#f0fdf4;border-radius:14px;padding:18px 20px;border:1.5px solid #bbf7d0">
+        <div style="font-weight:800;color:#0d3320;margin-bottom:4px">⏰ 9:00–17:00</div>
+        <div style="font-size:.82rem;color:#64748b">Ежедневно, без выходных</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
@@ -1291,7 +1324,7 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
     lsSet('goryankaOrderId',data.id)
     lsSet('goryankaLastOrder',Date.now())
     lsSet('goryankaUser',JSON.stringify({name,phone,street,entrance,floor,apartment}))
-    document.getElementById('modal').classList.add('show')
+    window.location.href='/thanks.html?id='+data.id
     this.reset()
     try{const saved=JSON.parse(lsGet('goryankaUser','{}'))
       if(saved.name)document.querySelector('[name=name]').value=saved.name
@@ -1309,6 +1342,12 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
     btn.disabled=false;btn.textContent='🚚 Оформить доставку →'
   }
 })
+
+// Автооткрытие кабинета при возврате со страницы thanks
+if(sessionStorage.getItem('openCabinet')){
+  sessionStorage.removeItem('openCabinet')
+  setTimeout(openCabinet,400)
+}
 
 // ── Личный кабинет ──
 const CAB_STATUSES={new:'Новая',confirmed:'Подтверждена',delivering:'В пути',done:'Доставлена',cancelled:'Отменена'}

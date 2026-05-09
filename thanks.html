@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Заказ принят — Горянка</title>
+<meta name="robots" content="noindex"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%231a6b3c'/><path d='M16 6 C16 6 9 16 9 21 a7 7 0 0 0 14 0 C23 16 16 6 16 6Z' fill='white' opacity='0.95'/><path d='M16 14 C16 14 12 19.5 12 22 a4 4 0 0 0 8 0 C20 19.5 16 14 16 14Z' fill='%2390e0ef' opacity='0.7'/></svg>"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;background:linear-gradient(150deg,#0d3320 0%,#1a6b3c 55%,#0ea5e9 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.card{background:#fff;border-radius:28px;padding:48px 40px;max-width:460px;width:100%;text-align:center;box-shadow:0 32px 80px rgba(0,0,0,.3)}
+.icon{font-size:4rem;margin-bottom:16px;animation:pop .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+h1{font-size:1.6rem;font-weight:900;color:#0d3320;margin-bottom:8px}
+.sub{color:#64748b;font-size:.95rem;line-height:1.6;margin-bottom:28px}
+.order-box{background:#f0fdf4;border:2px solid #86efac;border-radius:16px;padding:20px;margin-bottom:28px}
+.order-label{font-size:.78rem;font-weight:700;color:#16a34a;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+.order-num{font-size:2.4rem;font-weight:900;color:#0d3320}
+.steps{display:flex;justify-content:center;gap:0;margin-bottom:32px}
+.step{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;position:relative}
+.step::after{content:'';position:absolute;top:16px;left:50%;right:-50%;height:2px;background:#e2e8f0;z-index:0}
+.step:last-child::after{display:none}
+.step-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;position:relative;z-index:1;border:2px solid #e2e8f0;background:#fff}
+.step-dot.active{background:#16a34a;border-color:#16a34a;font-size:.85rem}
+.step-dot.done{background:#dcfce7;border-color:#86efac}
+.step-label{font-size:.68rem;color:#94a3b8;text-align:center;line-height:1.3}
+.step-label.active{color:#16a34a;font-weight:700}
+.btns{display:flex;flex-direction:column;gap:10px}
+.btn-primary{display:block;padding:14px;border-radius:14px;background:linear-gradient(135deg,#16a34a,#34d399);color:#fff;text-decoration:none;font-weight:800;font-size:1rem;transition:transform .2s,box-shadow .2s;box-shadow:0 6px 20px rgba(22,163,74,.35)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(22,163,74,.45)}
+.btn-outline{display:block;padding:13px;border-radius:14px;border:2px solid #e2e8f0;color:#64748b;text-decoration:none;font-weight:600;font-size:.92rem;transition:all .2s}
+.btn-outline:hover{border-color:#86efac;color:#16a34a}
+.contact{margin-top:24px;font-size:.82rem;color:#94a3b8}
+.contact a{color:#16a34a;text-decoration:none;font-weight:600}
+@media(max-width:480px){.card{padding:32px 24px}.order-num{font-size:2rem}}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="icon">🎉</div>
+  <h1>Заказ принят!</h1>
+  <p class="sub">Мы получили вашу заявку и скоро перезвоним для согласования доставки</p>
+
+  <div class="order-box">
+    <div class="order-label">Номер заказа</div>
+    <div class="order-num" id="orderNum">#—</div>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-dot active">✓</div>
+      <div class="step-label active">Принята</div>
+    </div>
+    <div class="step">
+      <div class="step-dot">📞</div>
+      <div class="step-label">Подтверждение</div>
+    </div>
+    <div class="step">
+      <div class="step-dot">🚚</div>
+      <div class="step-label">В пути</div>
+    </div>
+    <div class="step">
+      <div class="step-dot">✔️</div>
+      <div class="step-label">Доставлено</div>
+    </div>
+  </div>
+
+  <div class="btns">
+    <a href="/" class="btn-primary" onclick="openCabinetOnReturn(event)">Мои заказы →</a>
+    <a href="/" class="btn-outline">На главную</a>
+  </div>
+
+  <div class="contact">
+    Вопросы? Пишите в <a href="https://t.me/Alik2xx" target="_blank">Telegram</a>
+  </div>
+</div>
+
+<script>
+const params=new URLSearchParams(location.search)
+const id=params.get('id')
+if(id)document.getElementById('orderNum').textContent='#'+id
+
+function openCabinetOnReturn(e){
+  e.preventDefault()
+  sessionStorage.setItem('openCabinet','1')
+  location.href='/'
+}
+</script>
+</body>
+</html>
